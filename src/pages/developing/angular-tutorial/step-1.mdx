@@ -141,10 +141,10 @@ Prerequisites (above). We will be using the Angular CLI to create and generate
 our components. It can also generate services, router, components, and
 directives.
 
-To create a new Angular project with Angular CLI, just run:
+To create a new Angular project with Angular CLI, just run in the parent directory of `carbon-tutorial-angular`:
 
 ```bash
-ng new carbon-angular-tutorial
+ng new carbon-tutorial-angular
 ```
 
 This will create the new project within the current directory. Make sure you do
@@ -157,7 +157,7 @@ following.
 ```
 
 This command will install the Angular app with all the configurations needed.
-Within the project folder `carbon-angular-tutorial`, the `src` directory should
+Within the project folder `carbon-tutorial-angular`, the `src` directory should
 have the following structure:
 
 ```bash
@@ -314,6 +314,10 @@ import AppSwitcher16 from '@carbon/icons/es/app-switcher/16';
 ```
 <!-- prettier-ignore-end -->
 
+**Note:** You will get compilation errors because the `@carbon/icons` module doesn't have typescript typings.
+I created a file `index.d.ts` with a line `declare module '@carbon/icons/*';` and added `"index.d.ts"` as an
+include in the file `tsconfig.json`
+
 In the `AppModule` class we'll add a constructor that provides us with an
 instance of `IconService` and call `registerAll` with an array of the icons we
 need to use.
@@ -328,6 +332,9 @@ constructor(protected iconService: IconService) {
 }
 ```
 
+**Note** the above in not correct.  `src/app/app.component.spec.ts`, and `src/app/header/header.component.spec.ts` 
+do not have `AppModule` and have not imported the `IconService`.
+
 Then we need to add the template code. Populate `header.component.html` with:
 
 <!-- prettier-ignore-start -->
@@ -338,13 +345,13 @@ Then we need to add the template code. Populate `header.component.html` with:
   </ibm-header-navigation>
   <ibm-header-global>
     <ibm-header-action title="action">
-      <svg ibmIcon="notification" size="20"></svg>
+      <svg ibmIcon="notification" size="16"></svg>
     </ibm-header-action>
     <ibm-header-action title="action">
-      <svg ibmIcon="user--avatar" size="20"></svg>
+      <svg ibmIcon="user--avatar" size="16"></svg>
     </ibm-header-action>
     <ibm-header-action title="action">
-      <svg ibmIcon="app-switcher" size="20"></svg>
+      <svg ibmIcon="app-switcher" size="16"></svg>
     </ibm-header-action>
   </ibm-header-global>
 </ibm-header>
